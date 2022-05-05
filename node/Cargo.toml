@@ -1,0 +1,23 @@
+[package]
+edition = "2021"
+name = "speedy_sourcemap_node"
+publish = false
+version = "0.1.0"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[lib]
+crate-type = ["cdylib"]
+
+[dependencies]
+napi = {version = "2.0.1", features = ["napi3", "serde-json"]}
+napi-derive = "2.0.1"
+serde = {version = "1", features = ["derive"]}
+serde_json = "1"
+speedy_sourcemap = {path = "../core"}
+
+[target.'cfg(all(any(windows, unix), target_arch = "x86_64", not(target_env = "musl")))'.dependencies]
+mimalloc = {version = "0.1"}
+
+[build-dependencies]
+napi-build = "1"

@@ -1,0 +1,31 @@
+{
+  "name": "@speedy-js/source-map-freebsd-x64",
+  "version": "0.0.0",
+  "os": [
+    "freebsd"
+  ],
+  "cpu": [
+    "x64"
+  ],
+  "main": "speedy-sourcemap.freebsd-x64.node",
+  "files": [
+    "speedy-sourcemap.freebsd-x64.node"
+  ],
+  "description": "Speedy source-map",
+  "keywords": [
+    "sourcemap",
+    "speedy",
+    "napi",
+    "N-API",
+    "napi-rs"
+  ],
+  "license": "MIT",
+  "engines": {
+    "node": ">= 10"
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/",
+    "access": "public"
+  },
+  "repository": "https://github.com/speedy-js/sourcemap.git"
+}

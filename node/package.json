@@ -1,0 +1,54 @@
+{
+  "name": "@speedy-js/source-map",
+  "version": "0.0.0",
+  "description": "Speedy source-map",
+  "main": "index.js",
+  "types": "index.d.ts",
+  "repository": "https://github.com/speedy-js/napi-template.git",
+  "license": "MIT",
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/",
+    "access": "public"
+  },
+  "keywords": [
+    "sourcemap",
+    "speedy",
+    "napi",
+    "N-API",
+    "napi-rs"
+  ],
+  "files": [
+    "index.js",
+    "index.d.ts",
+    "binding.js"
+  ],
+  "scripts": {
+    "artifacts": "napi artifacts",
+    "build": "napi build --platform --release --js binding.js --pipe \"prettier -w\"",
+    "build:debug": "napi build --platform --js binding.js --pipe \"prettier -w\"",
+    "prepublishOnly": "napi prepublish -t npm && esbuild --minify --outfile=binding.js --allow-overwrite binding.js",
+    "lint": "echo lint",
+    "version": "napi version"
+  },
+  "napi": {
+    "name": "speedy-sourcemap",
+    "triples": {
+      "defaults": true,
+      "additional": [
+        "x86_64-unknown-linux-musl",
+        "aarch64-unknown-linux-gnu",
+        "i686-pc-windows-msvc",
+        "armv7-unknown-linux-gnueabihf",
+        "aarch64-apple-darwin",
+        "x86_64-unknown-freebsd",
+        "aarch64-unknown-linux-musl",
+        "aarch64-pc-windows-msvc",
+        "aarch64-linux-android",
+        "armv7-linux-androideabi"
+      ]
+    }
+  },
+  "engines": {
+    "node": ">= 10"
+  }
+}

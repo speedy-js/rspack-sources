@@ -1,0 +1,30 @@
+{
+  "name": "@speedy-js/wasm-template",
+  "version": "0.0.0",
+  "main": "pkg-node/index.js",
+  "types": "pkg-node/index.d.ts",
+  "browser": {
+    "pkg-node/index.js": "pkg-web/index.js"
+  },
+  "repository": "https://github.com/speedy-js/napi-template.git",
+  "license": "MIT",
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/",
+    "access": "public"
+  },
+  "keywords": [
+    "sourcemap",
+    "speedy",
+    "wasm",
+    "wasm-bindgen"
+  ],
+  "files": [
+    "pkg-node",
+    "pkg-web"
+  ],
+  "scripts": {
+    "build": "pnpm build:node && pnpm build:web",
+    "build:web": "wasm-pack build --target web --out-dir pkg-web --out-name index",
+    "build:node": "wasm-pack build --target nodejs --out-dir pkg-node --out-name index"
+  }
+}
