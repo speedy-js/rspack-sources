@@ -1,0 +1,34 @@
+{
+  "name": "node",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Speedy source-map",
+  "scripts": {
+    "build": "napi build --platform --release --js binding.js --dts binding.d.ts --pipe \"prettier -w\"",
+    "build:debug": "napi build --platform --js binding.js --dts binding.d.ts --pipe \"prettier -w\""
+  },
+  "napi": {
+    "name": "speedy-sourcemap",
+    "triples": {
+      "defaults": true,
+      "additional": [
+        "x86_64-unknown-linux-musl",
+        "aarch64-unknown-linux-gnu",
+        "i686-pc-windows-msvc",
+        "armv7-unknown-linux-gnueabihf",
+        "aarch64-apple-darwin",
+        "x86_64-unknown-freebsd",
+        "aarch64-unknown-linux-musl",
+        "aarch64-pc-windows-msvc",
+        "aarch64-linux-android",
+        "armv7-linux-androideabi"
+      ]
+    },
+    "package": {
+      "name": "@speedy-js/source-map"
+    }
+  },
+  "engines": {
+    "node": ">= 10"
+  }
+}

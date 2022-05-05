@@ -1,0 +1,22 @@
+[package]
+description = "speedy sourcemap"
+edition = "2021"
+license = "MIT"
+name = "speedy_sourcemap"
+repository = "https://github.com/speedy-js/sourcemap"
+version = "0.0.1"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[features]
+node-api = ["napi", "napi-derive"]
+
+[dependencies]
+
+[dependencies.napi]
+optional = true
+version = "2"
+
+[dependencies.napi-derive]
+optional = true
+version = "2"

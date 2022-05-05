@@ -1,0 +1,491 @@
+name: CI
+
+env:
+  DEBUG: 'napi:*'
+  APP_NAME: 'speedy-sourcemap'
+  MACOSX_DEPLOYMENT_TARGET: '10.13'
+  # https://github.com/SchrodingerZhu/snmalloc-rs
+  CACHE_FRIENDLY_OFFSET: 64
+
+'on':
+  push:
+    branches:
+      - main
+    tags-ignore:
+      - '**'
+    paths-ignore:
+      - '**/*.md'
+      - LICENSE
+      - '**/*.gitignore'
+      - .editorconfig
+      - docs/**
+  pull_request: null
+
+jobs:
+  build:
+    if: "!contains(github.event.head_commit.message, 'skip ci')"
+
+    strategy:
+      fail-fast: false
+      matrix:
+        settings:
+          - host: macos-latest
+            target: 'x86_64-apple-darwin'
+            build: |
+              pnpm build --dir node
+              strip -x node/*.node
+          - host: windows-latest
+            build: pnpm build --dir node
+            target: 'x86_64-pc-windows-msvc'
+          - host: windows-latest
+            build: |
+              export CARGO_PROFILE_RELEASE_CODEGEN_UNITS=32;
+              export CARGO_PROFILE_RELEASE_LTO=false
+              pnpm build --dir node -- --target i686-pc-windows-msvc
+              pnpm test:node
+            target: 'i686-pc-windows-msvc'
+            setup: |
+              choco install nodejs-lts --x86 -y --force
+              echo "C:\\Program Files (x86)\\nodejs" >> $GITHUB_PATH
+          - host: ubuntu-latest
+            target: 'x86_64-unknown-linux-gnu'
+            docker: |
+              docker pull $DOCKER_REGISTRY_URL/napi-rs/napi-rs/nodejs-rust:lts-debian
+              docker tag $DOCKER_REGISTRY_URL/napi-rs/napi-rs/nodejs-rust:lts-debian builder
+            build: |
+              docker run --rm -v ~/.cargo/git:/root/.cargo/git -v ~/.cargo/registry:/root/.cargo/registry -v $(pwd):/build -w /build builder sh -c "npm install -g pnpm && pnpm install && pnpm build --dir node && strip node/speedy-sourcemap.linux-x64-gnu.node"
+          - host: ubuntu-latest
+            target: 'x86_64-unknown-linux-musl'
+            docker: |
+              docker pull $DOCKER_REGISTRY_URL/napi-rs/napi-rs/nodejs-rust:lts-alpine
+              docker tag $DOCKER_REGISTRY_URL/napi-rs/napi-rs/nodejs-rust:lts-alpine builder
+            build: docker run --rm -v ~/.cargo/git:/root/.cargo/git -v ~/.cargo/registry:/root/.cargo/registry -v $(pwd):/build -w /build builder sh -c "apk add --update cmake && pnpm install && pnpm build --dir node && strip node/speedy-sourcemap.linux-x64-musl.node"
+          - host: macos-latest
+            target: 'aarch64-apple-darwin'
+            build: |
+              sudo rm -Rf /Library/Developer/CommandLineTools/SDKs/*;
+              export CC=$(xcrun -f clang);
+              export CXX=$(xcrun -f clang++);
+              SYSROOT=$(xcrun --sdk macosx --show-sdk-path);
+              export CFLAGS="-isysroot $SYSROOT -isystem $SYSROOT";
+              pnpm build --dir node -- --target=aarch64-apple-darwin
+              strip -x node/*.node
+          - host: ubuntu-latest
+            target: 'aarch64-unknown-linux-gnu'
+            setup: |
+              sudo apt-get update
+              sudo apt-get install g++-aarch64-linux-gnu gcc-aarch64-linux-gnu -y
+            build: |
+              pnpm build --dir node -- --target=aarch64-unknown-linux-gnu
+              aarch64-linux-gnu-strip node/speedy-sourcemap.linux-arm64-gnu.node
+          - host: ubuntu-latest
+            target: 'armv7-unknown-linux-gnueabihf'
+            setup: |
+              sudo apt-get update
+              sudo apt-get install gcc-arm-linux-gnueabihf g++-arm-linux-gnueabihf -y
+            build: |
+              pnpm build --dir node -- --target=armv7-unknown-linux-gnueabihf
+              arm-linux-gnueabihf-strip node/speedy-sourcemap.linux-arm-gnueabihf.node
+          - host: ubuntu-latest
+            target: 'aarch64-linux-android'
+            build: |
+              export CARGO_TARGET_AARCH64_LINUX_ANDROID_LINKER="${ANDROID_NDK_HOME}/toolchains/llvm/prebuilt/linux-x86_64/bin/aarch64-linux-android24-clang"
+              export PATH="${ANDROID_NDK_HOME}/toolchains/llvm/prebuilt/linux-x86_64/bin:${PATH}"
+              pnpm build --dir node -- --target aarch64-linux-android
+              ${ANDROID_NDK_HOME}/toolchains/llvm/prebuilt/linux-x86_64/bin/aarch64-linux-android-strip node/*.node
+          - host: ubuntu-latest
+            target: 'armv7-linux-androideabi'
+            build: |
+              export CARGO_TARGET_ARMV7_LINUX_ANDROIDEABI_LINKER="${ANDROID_NDK_HOME}/toolchains/llvm/prebuilt/linux-x86_64/bin/armv7a-linux-androideabi24-clang"
+              export CC="${ANDROID_NDK_HOME}/toolchains/llvm/prebuilt/linux-x86_64/bin/armv7a-linux-androideabi24-clang"
+              export CXX="${ANDROID_NDK_HOME}/toolchains/llvm/prebuilt/linux-x86_64/bin/armv7a-linux-androideabi24-clang++"
+              export PATH="${ANDROID_NDK_HOME}/toolchains/llvm/prebuilt/linux-x86_64/bin:${PATH}"
+              pnpm build --dir node -- --target armv7-linux-androideabi
+              ${ANDROID_NDK_HOME}/toolchains/llvm/prebuilt/linux-x86_64/bin/arm-linux-androideabi-strip node/*.node
+          - host: ubuntu-latest
+            target: 'aarch64-unknown-linux-musl'
+            docker: |
+              docker pull ghcr.io/napi-rs/napi-rs/nodejs-rust:lts-alpine
+              docker tag ghcr.io/napi-rs/napi-rs/nodejs-rust:lts-alpine builder
+            build: docker run --rm -v ~/.cargo/git:/root/.cargo/git -v ~/.cargo/registry:/root/.cargo/registry -v $(pwd):/speedy-sourcemap -w /speedy-sourcemap builder sh -c "rustup target add aarch64-unknown-linux-musl && pnpm build --dir node -- --target=aarch64-unknown-linux-musl && /aarch64-linux-musl-cross/bin/aarch64-linux-musl-strip node/speedy-sourcemap.linux-arm64-musl.node"
+          - host: windows-latest
+            target: 'aarch64-pc-windows-msvc'
+            build: pnpm build --dir node -- --target aarch64-pc-windows-msvc
+
+    name: stable - ${{ matrix.settings.target }} - node@14
+    runs-on: ${{ matrix.settings.host }}
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Setup node
+        uses: actions/setup-node@v2
+        with:
+          node-version: 14
+          check-latest: true
+
+      - name: Install pnpm
+        run: npm install -g pnpm
+
+      - name: Install
+        uses: actions-rs/toolchain@v1
+        with:
+          profile: minimal
+          override: true
+          target: ${{ matrix.settings.target }}
+
+      - name: Cache cargo
+        uses: Swatinem/rust-cache@v1
+        with:
+          key: ${{ matrix.settings.target }}-node@14-cargo-cache
+
+      - name: Cache NPM dependencies
+        uses: actions/cache@v2
+        with:
+          path: ~/.pnpm-store
+          key: npm-cache-${{ matrix.settings.target }}-node@14-${{ hashFiles('pnpm-lock.yaml') }}
+
+      - name: Pull latest image
+        run: ${{ matrix.settings.docker }}
+        env:
+          DOCKER_REGISTRY_URL: ghcr.io
+          DOCKER_USERNAME: ${{ github.actor }}
+          DOCKER_PASSWORD: ${{ secrets.GITHUB_TOKEN }}
+        if: ${{ matrix.settings.docker }}
+
+      - name: Setup toolchain
+        run: ${{ matrix.settings.setup }}
+        if: ${{ matrix.settings.setup }}
+        shell: bash
+
+      - name: 'Install dependencies'
+        run: pnpm install --frozen-lockfile
+
+      - name: 'Build'
+        run: ${{ matrix.settings.build }}
+        shell: bash
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: bindings-${{ matrix.settings.target }}
+          path: node/${{ env.APP_NAME }}.*.node
+
+  test-macOS-windows-binding:
+    name: Test bindings on ${{ matrix.settings.target }} - node@${{ matrix.node }}
+    needs:
+      - build
+    strategy:
+      fail-fast: false
+      matrix:
+        settings:
+          - host: macos-latest
+            target: 'x86_64-apple-darwin'
+          - host: windows-latest
+            target: 'x86_64-pc-windows-msvc'
+        node: ['12', '14', '16']
+    runs-on: ${{ matrix.settings.host }}
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Setup node
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node }}
+          check-latest: true
+
+      - name: Install pnpm
+        run: npm install -g pnpm
+
+      - name: Cache NPM dependencies
+        uses: actions/cache@v2
+        with:
+          path: ~/.pnpm-store
+          key: npm-cache-test-${{ matrix.settings.target }}-${{ matrix.node }}-${{ hashFiles('pnpm-lock.yaml') }}
+
+      - name: 'Install dependencies'
+        run: pnpm install --frozen-lockfile
+
+      - name: Download artifacts
+        uses: actions/download-artifact@v2
+        with:
+          name: bindings-${{ matrix.settings.target }}
+          path: node
+
+      - name: List packages
+        run: ls -R .
+        shell: bash
+
+      - name: Test bindings
+        run: pnpm test:node
+
+  test-linux-x64-gnu-binding:
+    name: Test bindings on Linux-x64-gnu - node@${{ matrix.node }}
+    needs:
+      - build
+    strategy:
+      fail-fast: false
+      matrix:
+        node: ['12', '14', '16']
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Setup node
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node }}
+          check-latest: true
+
+      - name: Download artifacts
+        uses: actions/download-artifact@v2
+        with:
+          name: bindings-x86_64-unknown-linux-gnu
+          path: node
+
+      - name: List packages
+        run: ls -R .
+        shell: bash
+
+      - name: Test bindings
+        run: docker run --rm -v $(pwd):/${{ env.APP_NAME }} -w /${{ env.APP_NAME }} node:${{ matrix.node }}-slim sh -c "npm install -g pnpm && pnpm install && pnpm test:node"
+
+  test-linux-x64-musl-binding:
+    name: Test bindings on x86_64-unknown-linux-musl - node@${{ matrix.node }}
+    needs:
+      - build
+    strategy:
+      fail-fast: false
+      matrix:
+        node: ['12', '14', '16']
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Setup node
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node }}
+          check-latest: true
+
+      - name: Download artifacts
+        uses: actions/download-artifact@v2
+        with:
+          name: bindings-x86_64-unknown-linux-musl
+          path: node
+
+      - name: List packages
+        run: ls -R .
+        shell: bash
+
+      - name: Test bindings
+        run: docker run --rm -v $(pwd):/${{ env.APP_NAME }} -w /${{ env.APP_NAME }} node:${{ matrix.node }}-alpine sh -c "npm install -g pnpm && pnpm install && pnpm test:node"
+
+  test-linux-aarch64-gnu-binding:
+    name: Test bindings on aarch64-unknown-linux-gnu - node@${{ matrix.node }}
+    needs:
+      - build
+    strategy:
+      fail-fast: false
+      matrix:
+        node: ['12', '14', '16']
+    runs-on: ubuntu-latest
+
+    steps:
+      - run: docker run --rm --privileged multiarch/qemu-user-static:register --reset
+
+      - uses: actions/checkout@v2
+
+      - name: Download artifacts
+        uses: actions/download-artifact@v2
+        with:
+          name: bindings-aarch64-unknown-linux-gnu
+          path: node
+
+      - name: List packages
+        run: ls -R .
+        shell: bash
+
+      - name: Setup and run tests
+        uses: addnab/docker-run-action@v3
+        with:
+          image: ghcr.io/napi-rs/napi-rs/nodejs:aarch64-${{ matrix.node }}
+          options: -v ${{ github.workspace }}:/build -w /build
+          run: |
+            set -e
+            npm install -g pnpm
+            pnpm install --frozen-lockfile
+            pnpm test:node
+            ls -la
+
+  test-linux-aarch64-musl-binding:
+    name: Test bindings on aarch64-unknown-linux-musl - node@lts
+    needs:
+      - build
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - run: docker run --rm --privileged multiarch/qemu-user-static:register --reset
+
+      - uses: actions/checkout@v2
+
+      - name: Download artifacts
+        uses: actions/download-artifact@v2
+        with:
+          name: bindings-aarch64-unknown-linux-musl
+          path: node
+
+      - name: List packages
+        run: ls -R .
+        shell: bash
+
+      - name: Setup and run tests
+        uses: docker://multiarch/alpine:aarch64-latest-stable
+        with:
+          args: >
+            sh -c "
+              apk add nodejs npm && \
+              npm install -g pnpm && \
+              pnpm install --frozen-lockfile && \
+              pnpm test:node
+            "
+
+  test-linux-arm-gnueabihf-binding:
+    name: Test bindings on armv7-unknown-linux-gnueabihf - node@${{ matrix.node }}
+    needs:
+      - build
+    strategy:
+      fail-fast: false
+      matrix:
+        node: ['12', '14', '16']
+    runs-on: ubuntu-latest
+
+    steps:
+      - run: docker run --rm --privileged multiarch/qemu-user-static:register --reset
+
+      - uses: actions/checkout@v2
+
+      - name: Download artifacts
+        uses: actions/download-artifact@v2
+        with:
+          name: bindings-armv7-unknown-linux-gnueabihf
+          path: node
+
+      - name: List packages
+        run: ls -R .
+        shell: bash
+
+      - name: Setup and run tests
+        uses: addnab/docker-run-action@v3
+        with:
+          image: ghcr.io/napi-rs/napi-rs/nodejs:armhf-${{ matrix.node }}
+          options: -v ${{ github.workspace }}:/build -w /build
+          run: |
+            set -e
+            npm install -g pnpm
+            pnpm install --frozen-lockfile
+            pnpm test:node
+            ls -la
+
+  test-wasm:
+    name: Test wasm on Linux-x64-gnu - node@${{ matrix.node }}
+    strategy:
+      fail-fast: false
+      matrix:
+        node: ['12', '14', '16']
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Setup node
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node }}
+          check-latest: true
+
+      - name: Install
+        uses: actions-rs/toolchain@v1
+        with:
+          profile: minimal
+          override: true
+
+      - name: Cache cargo
+        uses: Swatinem/rust-cache@v1
+        with:
+          key: ${{ matrix.settings.target }}-node@14-cargo-cache
+
+      - name: 'Install wasm-pack'
+        uses: jetli/wasm-pack-action@v0.3.0
+        with:
+          version: 'latest'
+
+      - name: Install pnpm
+        run: npm install -g pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile --registry https://registry.npm.taobao.org
+
+      - name: List packages
+        run: ls -R .
+        shell: bash
+
+      - name: Build and test wasm
+        run: pnpm build --dir wasm && pnpm test:wasm
+
+  publish:
+    name: Publish
+    runs-on: ubuntu-latest
+    needs:
+      - test-linux-x64-gnu-binding
+      - test-linux-x64-musl-binding
+      - test-linux-aarch64-gnu-binding
+      - test-linux-arm-gnueabihf-binding
+      - test-macOS-windows-binding
+      - test-linux-aarch64-musl-binding
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Setup node
+        uses: actions/setup-node@v2
+        with:
+          node-version: 14
+          check-latest: true
+
+      - name: Install pnpm
+        run: npm install -g pnpm
+
+      - name: Cache NPM dependencies
+        uses: actions/cache@v2
+        with:
+          path: ~/.pnpm-store
+          key: npm-cache-ubuntu-latest-${{ hashFiles('pnpm-lock.yaml') }}
+
+      - name: 'Install dependencies'
+        run: pnpm install --frozen-lockfile
+
+      - name: Download all artifacts
+        uses: actions/download-artifact@v2
+        with:
+          path: artifacts
+
+      - name: Move artifacts
+        run: pnpm artifacts
+
+      - name: List packages
+        run: ls -R ./npm
+        shell: bash
+
+      - name: Publish
+        if: "startsWith(github.event.head_commit.message, 'chore(release): publish')"
+        run: |
+          echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" >> ~/.npmrc
+          pnpm publish
+        env:
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

@@ -1,0 +1,31 @@
+{
+  "name": "@speedy-js/source-map-linux-arm64-musl",
+  "version": "0.0.0",
+  "os": [
+    "linux"
+  ],
+  "cpu": [
+    "arm64"
+  ],
+  "main": "speedy-sourcemap.linux-arm64-musl.node",
+  "files": [
+    "speedy-sourcemap.linux-arm64-musl.node"
+  ],
+  "description": "Speedy source-map",
+  "keywords": [
+    "sourcemap",
+    "speedy",
+    "napi",
+    "N-API",
+    "napi-rs"
+  ],
+  "license": "MIT",
+  "engines": {
+    "node": ">= 10"
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/",
+    "access": "public"
+  },
+  "repository": "https://github.com/speedy-js/sourcemap.git"
+}

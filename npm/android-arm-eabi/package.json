@@ -1,0 +1,31 @@
+{
+  "name": "@speedy-js/source-map-android-arm-eabi",
+  "version": "0.0.0",
+  "os": [
+    "android"
+  ],
+  "cpu": [
+    "arm"
+  ],
+  "main": "speedy-sourcemap.android-arm-eabi.node",
+  "files": [
+    "speedy-sourcemap.android-arm-eabi.node"
+  ],
+  "description": "Speedy source-map",
+  "keywords": [
+    "sourcemap",
+    "speedy",
+    "napi",
+    "N-API",
+    "napi-rs"
+  ],
+  "license": "MIT",
+  "engines": {
+    "node": ">= 10"
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/",
+    "access": "public"
+  },
+  "repository": "https://github.com/speedy-js/sourcemap.git"
+}

@@ -1,0 +1,31 @@
+{
+  "name": "@speedy-js/source-map-win32-arm64-msvc",
+  "version": "0.0.0",
+  "os": [
+    "win32"
+  ],
+  "cpu": [
+    "arm64"
+  ],
+  "main": "speedy-sourcemap.win32-arm64-msvc.node",
+  "files": [
+    "speedy-sourcemap.win32-arm64-msvc.node"
+  ],
+  "description": "Speedy source-map",
+  "keywords": [
+    "sourcemap",
+    "speedy",
+    "napi",
+    "N-API",
+    "napi-rs"
+  ],
+  "license": "MIT",
+  "engines": {
+    "node": ">= 10"
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/",
+    "access": "public"
+  },
+  "repository": "https://github.com/speedy-js/sourcemap.git"
+}
