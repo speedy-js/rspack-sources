@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1651943002304,
+  "lastUpdate": 1651945246814,
   "repoUrl": "https://github.com/speedy-js/rspack-sources",
   "entries": {
     "Benchmark": [
@@ -1118,6 +1118,37 @@ window.BENCHMARK_DATA = {
             "range": "±0.91%",
             "unit": "ops/sec",
             "extra": "83 samples"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "andywangsy@gmail.com",
+            "name": "h-a-n-a",
+            "username": "h-a-n-a"
+          },
+          "committer": {
+            "email": "andywangsy@gmail.com",
+            "name": "h-a-n-a",
+            "username": "h-a-n-a"
+          },
+          "distinct": true,
+          "id": "b6796e06e81c629e17b4c1c7c8fbe1da54cf0ffe",
+          "message": "test: add test cases for sourcemap sources",
+          "timestamp": "2022-05-08T01:39:19+08:00",
+          "tree_id": "3ddad224d3987acff36214f16e9df012c700edd2",
+          "url": "https://github.com/speedy-js/rspack-sources/commit/b6796e06e81c629e17b4c1c7c8fbe1da54cf0ffe"
+        },
+        "date": 1651945245813,
+        "tool": "benchmarkjs",
+        "benches": [
+          {
+            "name": "add#node",
+            "value": 654018757,
+            "range": "±0.81%",
+            "unit": "ops/sec",
+            "extra": "89 samples"
           }
         ]
       }
