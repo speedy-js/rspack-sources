@@ -1,6 +1,6 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1642533523413,
-  "repoUrl": "https://github.com/speedy-js/napi-template",
+  "lastUpdate": 1651913973887,
+  "repoUrl": "https://github.com/speedy-js/rspack-sources",
   "entries": {
     "Benchmark": [
       {
@@ -918,6 +918,51 @@ window.BENCHMARK_DATA = {
             "range": "±0.13%",
             "unit": "ops/sec",
             "extra": "96 samples"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "andywangsy@gmail.com",
+            "name": "h-a-n-a",
+            "username": "h-a-n-a"
+          },
+          "committer": {
+            "email": "andywangsy@gmail.com",
+            "name": "h-a-n-a",
+            "username": "h-a-n-a"
+          },
+          "distinct": true,
+          "id": "a23de1e02c984a7afdce955fb8cdb5f706d3c722",
+          "message": "ci: use pnpm^6",
+          "timestamp": "2022-05-07T16:56:51+08:00",
+          "tree_id": "118073a3c1855ed67081929068ba900bd4e42071",
+          "url": "https://github.com/speedy-js/rspack-sources/commit/a23de1e02c984a7afdce955fb8cdb5f706d3c722"
+        },
+        "date": 1651913972904,
+        "tool": "benchmarkjs",
+        "benches": [
+          {
+            "name": "add#rust_napi_node",
+            "value": 21118762,
+            "range": "±0.38%",
+            "unit": "ops/sec",
+            "extra": "93 samples"
+          },
+          {
+            "name": "add#rust_wasm_node",
+            "value": 72589300,
+            "range": "±0.26%",
+            "unit": "ops/sec",
+            "extra": "95 samples"
+          },
+          {
+            "name": "add#node",
+            "value": 713352649,
+            "range": "±0.12%",
+            "unit": "ops/sec",
+            "extra": "97 samples"
           }
         ]
       }
