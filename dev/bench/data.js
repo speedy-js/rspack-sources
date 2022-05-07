@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1651920059246,
+  "lastUpdate": 1651938351646,
   "repoUrl": "https://github.com/speedy-js/rspack-sources",
   "entries": {
     "Benchmark": [
@@ -1025,6 +1025,37 @@ window.BENCHMARK_DATA = {
             "range": "±0.09%",
             "unit": "ops/sec",
             "extra": "97 samples"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "andywangsy@gmail.com",
+            "name": "h-a-n-a",
+            "username": "h-a-n-a"
+          },
+          "committer": {
+            "email": "andywangsy@gmail.com",
+            "name": "h-a-n-a",
+            "username": "h-a-n-a"
+          },
+          "distinct": true,
+          "id": "9e639bea7d17de83b6cbe2028bec4028ea512493",
+          "message": "feat: impl sourcemap remapping",
+          "timestamp": "2022-05-07T23:44:15+08:00",
+          "tree_id": "2825402c6d1e4ee562d8aae63018d5e563d13b7e",
+          "url": "https://github.com/speedy-js/rspack-sources/commit/9e639bea7d17de83b6cbe2028bec4028ea512493"
+        },
+        "date": 1651938350642,
+        "tool": "benchmarkjs",
+        "benches": [
+          {
+            "name": "add#node",
+            "value": 714851765,
+            "range": "±0.12%",
+            "unit": "ops/sec",
+            "extra": "95 samples"
           }
         ]
       }
