@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1652100069157,
+  "lastUpdate": 1652102090275,
   "repoUrl": "https://github.com/speedy-js/rspack-sources",
   "entries": {
     "Benchmark": [
@@ -1335,6 +1335,37 @@ window.BENCHMARK_DATA = {
             "range": "±0.12%",
             "unit": "ops/sec",
             "extra": "94 samples"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "andywangsy@gmail.com",
+            "name": "h-a-n-a",
+            "username": "h-a-n-a"
+          },
+          "committer": {
+            "email": "andywangsy@gmail.com",
+            "name": "h-a-n-a",
+            "username": "h-a-n-a"
+          },
+          "distinct": true,
+          "id": "7ff97801c477f064565b3e8736d85e0e5e7cceb8",
+          "message": "refactor: refactor source map sources and concat sources",
+          "timestamp": "2022-05-09T21:13:32+08:00",
+          "tree_id": "205f3c7bfe985d774d4c73eff063d81857d66a70",
+          "url": "https://github.com/speedy-js/rspack-sources/commit/7ff97801c477f064565b3e8736d85e0e5e7cceb8"
+        },
+        "date": 1652102089725,
+        "tool": "benchmarkjs",
+        "benches": [
+          {
+            "name": "add#node",
+            "value": 711769587,
+            "range": "±0.17%",
+            "unit": "ops/sec",
+            "extra": "92 samples"
           }
         ]
       }
