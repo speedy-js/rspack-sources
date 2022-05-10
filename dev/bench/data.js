@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1652173047763,
+  "lastUpdate": 1652175090533,
   "repoUrl": "https://github.com/speedy-js/rspack-sources",
   "entries": {
     "Benchmark": [
@@ -1490,6 +1490,37 @@ window.BENCHMARK_DATA = {
             "range": "±0.15%",
             "unit": "ops/sec",
             "extra": "95 samples"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "andywangsy@gmail.com",
+            "name": "h-a-n-a",
+            "username": "h-a-n-a"
+          },
+          "committer": {
+            "email": "andywangsy@gmail.com",
+            "name": "h-a-n-a",
+            "username": "h-a-n-a"
+          },
+          "distinct": true,
+          "id": "c0c8f5f764252054194fbafb31f784484906f093",
+          "message": "feat: impl generate base64 for concat sources",
+          "timestamp": "2022-05-10T17:29:13+08:00",
+          "tree_id": "10eb9b74b3edcf995feb813b73ed01041d153075",
+          "url": "https://github.com/speedy-js/rspack-sources/commit/c0c8f5f764252054194fbafb31f784484906f093"
+        },
+        "date": 1652175089398,
+        "tool": "benchmarkjs",
+        "benches": [
+          {
+            "name": "add#node",
+            "value": 592104290,
+            "range": "±0.15%",
+            "unit": "ops/sec",
+            "extra": "96 samples"
           }
         ]
       }
