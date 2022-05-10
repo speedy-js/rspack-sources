@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1652182139396,
+  "lastUpdate": 1652182833870,
   "repoUrl": "https://github.com/speedy-js/rspack-sources",
   "entries": {
     "Benchmark": [
@@ -1645,6 +1645,37 @@ window.BENCHMARK_DATA = {
             "range": "±0.10%",
             "unit": "ops/sec",
             "extra": "92 samples"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "andywangsy@gmail.com",
+            "name": "h-a-n-a",
+            "username": "h-a-n-a"
+          },
+          "committer": {
+            "email": "andywangsy@gmail.com",
+            "name": "h-a-n-a",
+            "username": "h-a-n-a"
+          },
+          "distinct": true,
+          "id": "ddb1ac79bba7f971b9cd2b86271e938e6c4b49a6",
+          "message": "fix: fix clippy complaints",
+          "timestamp": "2022-05-10T19:39:09+08:00",
+          "tree_id": "68579c5e5e053306bd81cb5aea9113e9046f67d8",
+          "url": "https://github.com/speedy-js/rspack-sources/commit/ddb1ac79bba7f971b9cd2b86271e938e6c4b49a6"
+        },
+        "date": 1652182832855,
+        "tool": "benchmarkjs",
+        "benches": [
+          {
+            "name": "add#node",
+            "value": 593031564,
+            "range": "±0.20%",
+            "unit": "ops/sec",
+            "extra": "96 samples"
           }
         ]
       }
