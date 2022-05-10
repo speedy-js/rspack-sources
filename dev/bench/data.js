@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1652216640851,
+  "lastUpdate": 1652217112995,
   "repoUrl": "https://github.com/speedy-js/rspack-sources",
   "entries": {
     "Benchmark": [
@@ -1704,6 +1704,37 @@ window.BENCHMARK_DATA = {
           {
             "name": "add#node",
             "value": 714843516,
+            "range": "±0.14%",
+            "unit": "ops/sec",
+            "extra": "96 samples"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "andywangsy@gmail.com",
+            "name": "h-a-n-a",
+            "username": "h-a-n-a"
+          },
+          "committer": {
+            "email": "andywangsy@gmail.com",
+            "name": "h-a-n-a",
+            "username": "h-a-n-a"
+          },
+          "distinct": true,
+          "id": "c24467b852cb0719dcafd2e433a7826d6aad0de2",
+          "message": "feat: impl original source",
+          "timestamp": "2022-05-11T05:10:19+08:00",
+          "tree_id": "d65087b2db40c53679c20fa705b57e7ade154793",
+          "url": "https://github.com/speedy-js/rspack-sources/commit/c24467b852cb0719dcafd2e433a7826d6aad0de2"
+        },
+        "date": 1652217111938,
+        "tool": "benchmarkjs",
+        "benches": [
+          {
+            "name": "add#node",
+            "value": 714220349,
             "range": "±0.14%",
             "unit": "ops/sec",
             "extra": "96 samples"
