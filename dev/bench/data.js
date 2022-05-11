@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1652263299663,
+  "lastUpdate": 1652263455509,
   "repoUrl": "https://github.com/speedy-js/rspack-sources",
   "entries": {
     "Benchmark": [
@@ -1858,6 +1858,37 @@ window.BENCHMARK_DATA = {
             "range": "±0.10%",
             "unit": "ops/sec",
             "extra": "98 samples"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "andywangsy@gmail.com",
+            "name": "Hana",
+            "username": "h-a-n-a"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "21327e86b58daec2725c1aeb5e6f0849e718d258",
+          "message": "refactor: use string intern (#2)",
+          "timestamp": "2022-05-11T18:02:29+08:00",
+          "tree_id": "35d789b42a21239418f8b92bf8f4065415688aa2",
+          "url": "https://github.com/speedy-js/rspack-sources/commit/21327e86b58daec2725c1aeb5e6f0849e718d258"
+        },
+        "date": 1652263454477,
+        "tool": "benchmarkjs",
+        "benches": [
+          {
+            "name": "add#node",
+            "value": 640340269,
+            "range": "±1.11%",
+            "unit": "ops/sec",
+            "extra": "89 samples"
           }
         ]
       }
