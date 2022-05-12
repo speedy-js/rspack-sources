@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1652361987171,
+  "lastUpdate": 1652362946626,
   "repoUrl": "https://github.com/speedy-js/rspack-sources",
   "entries": {
     "Benchmark": [
@@ -2333,6 +2333,37 @@ window.BENCHMARK_DATA = {
             "value": 1190359,
             "range": "± 8595",
             "unit": "ns/iter"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "andywangsy@gmail.com",
+            "name": "h-a-n-a",
+            "username": "h-a-n-a"
+          },
+          "committer": {
+            "email": "andywangsy@gmail.com",
+            "name": "h-a-n-a",
+            "username": "h-a-n-a"
+          },
+          "distinct": true,
+          "id": "57d6f4c195cfae65b47f9f3f0e9d9dbf0ac56f79",
+          "message": "chore(cargo-release): release v0.0.2",
+          "timestamp": "2022-05-12T21:40:53+08:00",
+          "tree_id": "c3b5e5e7ac6ccaa6aff0698b5892302528341a48",
+          "url": "https://github.com/speedy-js/rspack-sources/commit/57d6f4c195cfae65b47f9f3f0e9d9dbf0ac56f79"
+        },
+        "date": 1652362945577,
+        "tool": "benchmarkjs",
+        "benches": [
+          {
+            "name": "add#node",
+            "value": 594538785,
+            "range": "±0.10%",
+            "unit": "ops/sec",
+            "extra": "98 samples"
           }
         ]
       }
