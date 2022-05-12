@@ -13,6 +13,17 @@ sourcemap = "6.0.2"
 smol_str = "0.1.23"
 base64 = "0.13.0"
 
+[dependencies.rayon]
+version = "1.5.2"
+optional = true
+
+[dependencies.dashmap]
+version = "5.3.3"
+optional = true
+features = ["rayon"]
+
 [dev-dependencies]
 once_cell = "1.10.0"
 
+[features]
+concurrent = ["rayon", "dashmap"]

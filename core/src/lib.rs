@@ -1,6 +1,7 @@
 #![deny(clippy::all)]
 
 mod result;
+mod sync;
 
 mod cached_source;
 mod concat_source;

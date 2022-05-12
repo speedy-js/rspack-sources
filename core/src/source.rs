@@ -1,6 +1,6 @@
+use crate::sync::Lrc;
 use smol_str::SmolStr;
 use sourcemap::SourceMap;
-use std::sync::Arc;
 
 #[derive(Clone, PartialEq, Eq, Hash)]
 pub struct GenMapOption {
@@ -21,7 +21,7 @@ impl Default for GenMapOption {
 }
 
 pub trait Source {
-  fn map(&mut self, option: &GenMapOption) -> Option<Arc<SourceMap>>;
+  fn map(&mut self, option: &GenMapOption) -> Option<Lrc<SourceMap>>;
 
   fn source(&mut self) -> SmolStr;
 }
