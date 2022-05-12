@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1652361101366,
+  "lastUpdate": 1652361490770,
   "repoUrl": "https://github.com/speedy-js/rspack-sources",
   "entries": {
     "Benchmark": [
@@ -2132,6 +2132,33 @@ window.BENCHMARK_DATA = {
             "range": "±0.12%",
             "unit": "ops/sec",
             "extra": "94 samples"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "name": "speedy-js",
+            "username": "speedy-js"
+          },
+          "committer": {
+            "name": "speedy-js",
+            "username": "speedy-js"
+          },
+          "id": "4bbeb53ce5dd5b45c2d1c9004870992619326ed6",
+          "message": "perf: optimize cache performance",
+          "timestamp": "2022-05-07T10:37:36Z",
+          "url": "https://github.com/speedy-js/rspack-sources/pull/4/commits/4bbeb53ce5dd5b45c2d1c9004870992619326ed6"
+        },
+        "date": 1652361489722,
+        "tool": "benchmarkjs",
+        "benches": [
+          {
+            "name": "add#node",
+            "value": 679352381,
+            "range": "±0.88%",
+            "unit": "ops/sec",
+            "extra": "90 samples"
           }
         ]
       }
