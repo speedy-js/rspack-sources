@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1652297398852,
+  "lastUpdate": 1652346065417,
   "repoUrl": "https://github.com/speedy-js/rspack-sources",
   "entries": {
     "Benchmark": [
@@ -2024,6 +2024,33 @@ window.BENCHMARK_DATA = {
             "range": "±0.51%",
             "unit": "ops/sec",
             "extra": "93 samples"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "name": "speedy-js",
+            "username": "speedy-js"
+          },
+          "committer": {
+            "name": "speedy-js",
+            "username": "speedy-js"
+          },
+          "id": "ef197bd8fb838d6d879dbc74d6858723c1761251",
+          "message": "feat: impl concurrent concattenation",
+          "timestamp": "2022-05-07T10:37:36Z",
+          "url": "https://github.com/speedy-js/rspack-sources/pull/3/commits/ef197bd8fb838d6d879dbc74d6858723c1761251"
+        },
+        "date": 1652346064872,
+        "tool": "benchmarkjs",
+        "benches": [
+          {
+            "name": "add#node",
+            "value": 798495776,
+            "range": "±1.07%",
+            "unit": "ops/sec",
+            "extra": "89 samples"
           }
         ]
       }
