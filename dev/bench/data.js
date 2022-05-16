@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1652727154146,
+  "lastUpdate": 1652727181132,
   "repoUrl": "https://github.com/speedy-js/rspack-sources",
   "entries": {
     "Benchmark": [
@@ -2633,6 +2633,37 @@ window.BENCHMARK_DATA = {
             "range": "±0.89%",
             "unit": "ops/sec",
             "extra": "94 samples"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "andywangsy@gmail.com",
+            "name": "Hana",
+            "username": "h-a-n-a"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "fc056b6e625cf273f77704091366717c445c6abd",
+          "message": "feat: add tracing apis (#6)",
+          "timestamp": "2022-05-17T02:50:36+08:00",
+          "tree_id": "24ef9a69f59960de00ec82f9f879b69979ac707a",
+          "url": "https://github.com/speedy-js/rspack-sources/commit/fc056b6e625cf273f77704091366717c445c6abd"
+        },
+        "date": 1652727180623,
+        "tool": "benchmarkjs",
+        "benches": [
+          {
+            "name": "add#node",
+            "value": 715664098,
+            "range": "±0.14%",
+            "unit": "ops/sec",
+            "extra": "95 samples"
           }
         ]
       }
