@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1652390920815,
+  "lastUpdate": 1652727154146,
   "repoUrl": "https://github.com/speedy-js/rspack-sources",
   "entries": {
     "Benchmark": [
@@ -2606,6 +2606,33 @@ window.BENCHMARK_DATA = {
             "value": 1050372,
             "range": "± 12580",
             "unit": "ns/iter"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "name": "speedy-js",
+            "username": "speedy-js"
+          },
+          "committer": {
+            "name": "speedy-js",
+            "username": "speedy-js"
+          },
+          "id": "97dd449cc906dde071e564416a95ff61368f04ca",
+          "message": "feat: add tracing apis",
+          "timestamp": "2022-05-07T10:37:36Z",
+          "url": "https://github.com/speedy-js/rspack-sources/pull/6/commits/97dd449cc906dde071e564416a95ff61368f04ca"
+        },
+        "date": 1652727153043,
+        "tool": "benchmarkjs",
+        "benches": [
+          {
+            "name": "add#node",
+            "value": 799183145,
+            "range": "±0.89%",
+            "unit": "ops/sec",
+            "extra": "94 samples"
           }
         ]
       }
