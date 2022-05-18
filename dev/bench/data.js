@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1652867145661,
+  "lastUpdate": 1652892385799,
   "repoUrl": "https://github.com/speedy-js/rspack-sources",
   "entries": {
     "Benchmark": [
@@ -3029,6 +3029,37 @@ window.BENCHMARK_DATA = {
             "value": 10858,
             "range": "± 92",
             "unit": "ns/iter"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "iwanabethatguy@qq.com",
+            "name": "IWANABETHATGUY",
+            "username": "IWANABETHATGUY"
+          },
+          "committer": {
+            "email": "andywangsy@gmail.com",
+            "name": "Hana",
+            "username": "h-a-n-a"
+          },
+          "distinct": true,
+          "id": "53393710a7e634d3a463c12cf09dcc82803c1632",
+          "message": "chore: 🤖 remove base64 dep",
+          "timestamp": "2022-05-19T00:44:15+08:00",
+          "tree_id": "f72a28a182427994d35474413a5472680ada6013",
+          "url": "https://github.com/speedy-js/rspack-sources/commit/53393710a7e634d3a463c12cf09dcc82803c1632"
+        },
+        "date": 1652892385287,
+        "tool": "benchmarkjs",
+        "benches": [
+          {
+            "name": "add#node",
+            "value": 594911532,
+            "range": "±0.34%",
+            "unit": "ops/sec",
+            "extra": "97 samples"
           }
         ]
       }
