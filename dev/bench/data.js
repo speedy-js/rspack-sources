@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1652867116833,
+  "lastUpdate": 1652867145661,
   "repoUrl": "https://github.com/speedy-js/rspack-sources",
   "entries": {
     "Benchmark": [
@@ -2973,6 +2973,62 @@ window.BENCHMARK_DATA = {
             "range": "±0.10%",
             "unit": "ops/sec",
             "extra": "97 samples"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "name": "speedy-js",
+            "username": "speedy-js"
+          },
+          "committer": {
+            "name": "speedy-js",
+            "username": "speedy-js"
+          },
+          "id": "0e2188f6dcec9ca66b64d29c533c7afbd968e2ff",
+          "message": "perf: ⚡️ perf base64",
+          "timestamp": "2022-05-07T10:37:36Z",
+          "url": "https://github.com/speedy-js/rspack-sources/pull/7/commits/0e2188f6dcec9ca66b64d29c533c7afbd968e2ff"
+        },
+        "date": 1652867144870,
+        "tool": "cargo",
+        "benches": [
+          {
+            "name": "benchmark_concat_generate_base64",
+            "value": 13075,
+            "range": "± 155",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "benchmark_concat_generate_base64_with_cache",
+            "value": 10672,
+            "range": "± 185",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "benchmark_concat_generate_string",
+            "value": 12208,
+            "range": "± 121",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "benchmark_concat_generate_string_with_cache",
+            "value": 9653,
+            "range": "± 147",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "benchmark_concat_generate_url",
+            "value": 13115,
+            "range": "± 168",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "benchmark_concat_generate_url_with_cache",
+            "value": 10858,
+            "range": "± 92",
+            "unit": "ns/iter"
           }
         ]
       }
