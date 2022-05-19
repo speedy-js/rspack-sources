@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1652951832211,
+  "lastUpdate": 1652951860293,
   "repoUrl": "https://github.com/speedy-js/rspack-sources",
   "entries": {
     "Benchmark": [
@@ -3234,6 +3234,66 @@ window.BENCHMARK_DATA = {
             "range": "±0.15%",
             "unit": "ops/sec",
             "extra": "97 samples"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "andywangsy@gmail.com",
+            "name": "h-a-n-a",
+            "username": "h-a-n-a"
+          },
+          "committer": {
+            "email": "andywangsy@gmail.com",
+            "name": "h-a-n-a",
+            "username": "h-a-n-a"
+          },
+          "distinct": true,
+          "id": "8a27694dcd4bb190f64e361fadba96d2061721b1",
+          "message": "chore(cargo-release): release v0.0.3",
+          "timestamp": "2022-05-19T17:15:38+08:00",
+          "tree_id": "253c0bd46c42a8876416decb65888da0f899b2cd",
+          "url": "https://github.com/speedy-js/rspack-sources/commit/8a27694dcd4bb190f64e361fadba96d2061721b1"
+        },
+        "date": 1652951859686,
+        "tool": "cargo",
+        "benches": [
+          {
+            "name": "benchmark_concat_generate_base64",
+            "value": 12062,
+            "range": "± 54",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "benchmark_concat_generate_base64_with_cache",
+            "value": 9659,
+            "range": "± 48",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "benchmark_concat_generate_string",
+            "value": 11253,
+            "range": "± 114",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "benchmark_concat_generate_string_with_cache",
+            "value": 8901,
+            "range": "± 36",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "benchmark_concat_generate_url",
+            "value": 11961,
+            "range": "± 57",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "benchmark_concat_generate_url_with_cache",
+            "value": 9991,
+            "range": "± 52",
+            "unit": "ns/iter"
           }
         ]
       }
